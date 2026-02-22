@@ -1,14 +1,34 @@
 import { useState } from "react";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/contexts/AuthContext";
+import { toast } from "sonner";
 
 const ContactSection = () => {
   const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const { user } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert("Thank you for reaching out! We'll get back to you within 24 hours.");
-    setForm({ name: "", email: "", phone: "", message: "" });
+    setLoading(true);
+
+    const { error } = await supabase.from("inquiries").insert({
+      name: form.name.trim().slice(0, 100),
+      email: form.email.trim().slice(0, 255),
+      phone: form.phone.trim().slice(0, 20),
+      message: form.message.trim().slice(0, 1000),
+      user_id: user?.id || null,
+    });
+
+    if (error) {
+      toast.error("Failed to send message. Please try again.");
+    } else {
+      toast.success("Message sent! We'll get back to you within 24 hours.");
+      setForm({ name: "", email: "", phone: "", message: "" });
+    }
+    setLoading(false);
   };
 
   return (
@@ -85,8 +105,8 @@ const ContactSection = () => {
                 className="w-full resize-none rounded-md border border-border bg-background px-4 py-2.5 font-body text-sm text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
               />
             </div>
-            <Button variant="hero" type="submit" size="lg">
-              Send Message
+            <Button variant="hero" type="submit" size="lg" disabled={loading}>
+              {loading ? "Sending..." : "Send Message"}
             </Button>
           </form>
         </div>

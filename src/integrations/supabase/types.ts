@@ -14,7 +14,81 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      inquiries: {
+        Row: {
+          created_at: string
+          email: string | null
+          id: string
+          message: string
+          name: string
+          phone: string | null
+          plan_interest: string | null
+          status: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message: string
+          name: string
+          phone?: string | null
+          plan_interest?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          id?: string
+          message?: string
+          name?: string
+          phone?: string | null
+          plan_interest?: string | null
+          status?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          membership_end: string | null
+          membership_start: string | null
+          membership_status: string | null
+          phone: string | null
+          selected_plan: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          membership_end?: string | null
+          membership_start?: string | null
+          membership_status?: string | null
+          phone?: string | null
+          selected_plan?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          membership_end?: string | null
+          membership_start?: string | null
+          membership_status?: string | null
+          phone?: string | null
+          selected_plan?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

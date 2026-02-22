@@ -64,7 +64,14 @@ const PlansSection = () => {
                   </li>
                 ))}
               </ul>
-              <Button variant={plan.popular ? "hero" : "heroOutline"} className="w-full">
+              <Button
+                variant={plan.popular ? "hero" : "heroOutline"}
+                className="w-full"
+                onClick={() => {
+                  const msg = encodeURIComponent(`Hi! I'm interested in the ${plan.name} plan (${plan.price}${plan.period}) at IronCore Fitness.`);
+                  window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+                }}
+              >
                 Get Started
               </Button>
             </div>

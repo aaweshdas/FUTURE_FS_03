@@ -1,7 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import heroImg from "@/assets/hero-gym.jpg";
-
 const HeroSection = () => {
+  const navigate = useNavigate();
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image */}
@@ -25,10 +27,13 @@ const HeroSection = () => {
             State-of-the-art equipment, certified trainers, and flexible plans designed to help you crush every fitness goal. Your transformation starts here.
           </p>
           <div className="flex flex-wrap gap-4 animate-fade-in-up" style={{ animationDelay: "0.45s" }}>
-            <Button variant="hero" size="lg">
+            <Button variant="hero" size="lg" onClick={() => navigate("/auth")}>
               Join Now
             </Button>
-            <Button variant="heroOutline" size="lg">
+            <Button variant="heroOutline" size="lg" onClick={() => {
+              const msg = encodeURIComponent("Hi! I'd like to book a free trial session at IronCore Fitness.");
+              window.open(`https://wa.me/919876543210?text=${msg}`, "_blank");
+            }}>
               Free Trial
             </Button>
           </div>
