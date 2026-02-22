@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -14,6 +16,8 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -43,9 +47,15 @@ const Navbar = () => {
               {link.label}
             </a>
           ))}
-          <Button variant="hero" size="sm">
-            Join Now
-          </Button>
+          {user ? (
+            <Button variant="hero" size="sm" onClick={() => navigate("/dashboard")}>
+              Dashboard
+            </Button>
+          ) : (
+            <Button variant="hero" size="sm" onClick={() => navigate("/auth")}>
+              Join Now
+            </Button>
+          )}
         </div>
 
         {/* Mobile toggle */}
@@ -72,9 +82,15 @@ const Navbar = () => {
                 {link.label}
               </a>
             ))}
-            <Button variant="hero" size="sm" className="w-fit">
-              Join Now
-            </Button>
+            {user ? (
+              <Button variant="hero" size="sm" className="w-fit" onClick={() => { setIsOpen(false); navigate("/dashboard"); }}>
+                Dashboard
+              </Button>
+            ) : (
+              <Button variant="hero" size="sm" className="w-fit" onClick={() => { setIsOpen(false); navigate("/auth"); }}>
+                Join Now
+              </Button>
+            )}
           </div>
         </div>
       )}
