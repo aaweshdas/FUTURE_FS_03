@@ -12,6 +12,10 @@ Future FS 03 is a highly responsive full-stack application that cleanly separate
 
 ---
 
+*Project Live URL: [https://bit.ly/4s2T45F](https://bit.ly/4s2T45F)*
+
+---
+
 ## 🏗️ Architecture
 
 ```text
@@ -137,6 +141,3 @@ The frontend can be deployed seamlessly to platforms like Vercel, Netlify, or AW
 
 ### ☁️ Deploying the Backend
 Your backend lives on Supabase. As long as the database is active and the URL/Anon key are correctly provided to your deployed frontend, the integration will function perfectly in production.
-
----
-*Project Live URL: [https://bit.ly/4s2T45F](https://bit.ly/4s2T45F)*
