@@ -1,73 +1,111 @@
-# Welcome to your Lovable project
+# Full-Stack Web Application
 
-## Project info
+A modern, production-ready full-stack web application. The architecture is cleanly separated into a highly responsive frontend and a powerful, serverless backend and database architecture.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Architecture Overview
 
-## How can I edit this code?
+- **Frontend:** React 18, Vite, TypeScript, Tailwind CSS, shadcn/ui.
+- **Backend & Database:** Supabase (PostgreSQL Database, Authentication, Storage, Edge Functions).
 
-There are several ways of editing your application.
+## Features
 
-**Use Lovable**
+- **Robust User Authentication:** Secure login, registration, and session management.
+- **Interactive Dashboard:** Dedicated protected routes (`Dashboard.tsx`) for authenticated users.
+- **Modern Tech Stack:** Fast build and development process via Vite.
+- **Type Safety:** Built end-to-end with TypeScript for maximum reliability.
+- **Beautiful UI Components:** Pre-built, customizable UI using shadcn/ui and Tailwind CSS.
+- **State Management:** Efficient data fetching and caching with TanStack React Query.
+- **Dark Mode Support:** Themed UI using `next-themes`.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## 🚀 Getting Started
 
-**Use your preferred IDE**
+Follow these steps to set up the frontend, backend, and database locally on your machine.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Prerequisites
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+Ensure you have the following installed on your local machine:
+- **Node.js** (v18.0 or higher recommended)
+- **npm**, **yarn**, or **pnpm**
+- A **Supabase** account (for Backend & Database services)
 
-Follow these steps:
+### 1. Database & Backend Setup (Supabase)
+
+This application relies on Supabase for its database (PostgreSQL) and backend services (Auth/API).
+
+1. Go to [Supabase](https://supabase.com/) and create a new project.
+2. Once the project is created, navigate to **Project Settings -> API** to find your **Project URL** and **anon key**.
+3. (Optional) Run any necessary SQL schema migrations supplied within the `supabase/` folder in your Supabase project's SQL Editor to set up the required tables.
+
+### 2. Frontend Setup
+
+1. Clone the repository to your local machine:
+   ```sh
+   git clone https://github.com/aaweshdas/FUTURE_FS_03.git
+   cd FUTURE_FS_03
+   ```
+
+2. Install the necessary Node dependencies:
+   ```sh
+   npm install
+   ```
+
+3. Configure your Environment Variables:
+   Create a `.env` file in the root directory and add your Supabase credentials obtained in the backend setup step:
+
+   ```env
+   VITE_SUPABASE_URL=your-supabase-url-here
+   VITE_SUPABASE_ANON_KEY=your-supabase-anon-key-here
+   ```
+
+### 3. Running the Application
+
+Once both the Backend/DB is configured and the Frontend dependencies are installed, you can start the application locally:
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The frontend client will spin up and be accessible in your browser (typically at `http://localhost:8080` or `http://localhost:5173`). It will automatically connect to your hosted Supabase Database and Backend.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+---
 
-**Use GitHub Codespaces**
+## Project Structure
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```text
+FUTURE_FS_03/
+├── public/                 # Static assets
+├── src/
+│   ├── assets/             # Images, SVGs, etc.
+│   ├── components/         # Reusable UI components (including shadcn/ui)
+│   ├── contexts/           # Context providers (e.g., AuthProvider)
+│   ├── hooks/              # Custom React hooks
+│   ├── integrations/       # Backend integrations (Supabase setup config)
+│   ├── lib/                # Utility functions
+│   ├── pages/              # Route-level components (Auth, Dashboard, Index)
+│   ├── App.tsx             # Main application component & routing setup
+│   ├── main.tsx            # React application entry point
+│   └── index.css           # Global Tailwind styles
+├── supabase/               # Backend edge functions or migration scripts
+├── package.json            # Project dependencies and operational scripts
+├── tailwind.config.ts      # Tailwind CSS configuration
+└── vite.config.ts          # Vite bundler configuration
+```
 
-## What technologies are used for this project?
+## Available Scripts
 
-This project is built with:
+In the project directory, you can also run:
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Builds the app for production, creating a `dist` folder.
+- `npm run preview`: Locally preview the production build output.
+- `npm run lint`: Lints the source code using ESLint.
 
-## How can I deploy this project?
+## Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+### Deploying the Frontend
+The frontend can be deployed easily to CI/CD platforms like [Vercel](https://vercel.com/), [Netlify](https://www.netlify.com/), or AWS. Set the build command to `npm run build`, the output directory to `dist`, and ensure your `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` are added to the environment variables on the hosting provider.
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### Deploying the Backend
+Your backend lives on Supabase. As long as the database is active and the URL/Anon key are correctly provided to the built frontend, the backend will function fully in production.
